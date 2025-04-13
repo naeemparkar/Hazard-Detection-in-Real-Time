@@ -1,97 +1,84 @@
 # Hazard Detection System
 
-A real-time hazard detection system with a modern web dashboard for monitoring and alerts.
+A real-time system for detecting hazards in images and videos using a YOLO model. The system processes uploaded media, detects potential hazards, and sends SMS alerts using Twilio.
 
 ## Features
 
-- Upload images and videos for hazard detection
-- Real-time processing with visual feedback
-- Automated alert system for detected hazards via Twilio
-- Modern, responsive UI with Next.js and Tailwind CSS
-- Backend powered by Flask and advanced computer vision models
+- Real-time hazard detection in images and videos using a YOLO-based model
+- Beautiful and responsive UI built with Next.js and Tailwind CSS
+- SMS alerts via Twilio when hazards are detected
+- Progress tracking for file processing
+- Detailed visualization of detected hazards
+- Containerized for easy deployment
 
-## Project Structure
+## Quick Start - Docker Deployment
 
-- **Frontend**: Next.js application with Tailwind CSS
-- **Backend**: Flask API with computer vision models for hazard detection
+The easiest way to deploy the entire system is using Docker Compose:
 
-## Setup Instructions
+1. **Prerequisites**:
+   - Docker and Docker Compose installed
+   - 4GB+ RAM for the YOLO model
 
-### Prerequisites
+2. **Build and start the containers**:
+   ```bash
+   docker-compose up -d --build
+   ```
 
-- Node.js (v14 or later)
-- Python 3.8+
-- pip (Python package manager)
+3. **Access the application**:
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:5000
 
-### Backend Setup
+For more detailed deployment options (including cloud deployment), see [DEPLOYMENT.md](DEPLOYMENT.md).
+
+## Development Setup
+
+### Backend (Flask + YOLO)
 
 1. Navigate to the backend directory:
-   ```
+   ```bash
    cd backend
    ```
 
 2. Install dependencies:
-   ```
+   ```bash
    pip install -r requirements.txt
    ```
 
-3. Create an `uploads` directory:
-   ```
-   mkdir uploads
+3. Start the Flask server:
+   ```bash
+   python app.py
    ```
 
-### Frontend Setup
+### Frontend (Next.js)
 
 1. Navigate to the frontend directory:
-   ```
+   ```bash
    cd frontend
    ```
 
 2. Install dependencies:
-   ```
+   ```bash
    npm install
    ```
 
-## Running the Application
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-You can run both frontend and backend together using the provided batch file:
+## Environment Variables
 
-```
-start.bat
-```
+### Backend
 
-Or run them individually:
+- `DEBUG`: Enable/disable debug mode
+- `TWILIO_SID`: Your Twilio account SID
+- `TWILIO_AUTH_TOKEN`: Your Twilio auth token
+- `TWILIO_PHONE_NUMBER`: Your Twilio phone number
+- `ALERT_PHONE_NUMBER`: Phone number to receive alerts
 
-### Run the Backend
+### Frontend
 
-```
-cd backend
-python app.py
-```
-
-The backend server will run at http://localhost:5000
-
-### Run the Frontend
-
-```
-cd frontend
-npm run dev
-```
-
-The frontend will be available at http://localhost:3000
-
-## Usage
-
-1. Open the dashboard at http://localhost:3000
-2. Upload an image or video file using the file upload area
-3. Click "Upload for Processing" to start the hazard detection
-4. The system will process the file and display results
-5. If a hazard is detected, the system will automatically send an alert via Twilio
-
-## Security Notes
-
-- This application contains Twilio API credentials that should be secured in a production environment
-- Consider using environment variables for sensitive information 
+- `NEXT_PUBLIC_API_URL`: URL of the backend API (default: http://localhost:5000)
 
 ## License
 
